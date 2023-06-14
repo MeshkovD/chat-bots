@@ -28,10 +28,7 @@ def main():
             payload = {'timestamp': response_data.get('timestamp_to_request')}
 
             if response_data.get('status') == "found":
-                if response_data.get('new_attempts'):
-                    new_attempts = response_data.get('new_attempts')[0]
-                else:
-                    continue
+                new_attempts = response_data.get('new_attempts')[0]
 
                 lesson_title = new_attempts.get('lesson_title')
                 lesson_url = new_attempts.get('lesson_url')
