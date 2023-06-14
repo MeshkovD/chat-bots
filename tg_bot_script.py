@@ -24,12 +24,12 @@ def main():
         try:
             response = requests.get(url, headers=headers, data=payload, timeout=120)
             response.raise_for_status()
-            response_json = response.json()
-            payload = {'timestamp': response_json.get('timestamp_to_request')}
+            response_data = response.json()
+            payload = {'timestamp': response_data.get('timestamp_to_request')}
 
-            if response_json.get('status') == "found":
-                if response_json.get('new_attempts'):
-                    new_attempts = response_json.get('new_attempts')[0]
+            if response_data.get('status') == "found":
+                if response_data.get('new_attempts'):
+                    new_attempts = response_data.get('new_attempts')[0]
                 else:
                     continue
 
