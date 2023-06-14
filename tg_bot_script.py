@@ -27,10 +27,9 @@ def main():
             payload = {'timestamp': response_json.get('timestamp_to_request')}
 
             if response_json.get('status') == "found":
-                try:
+                if response_json.get('new_attempts'):
                     new_attempts = response_json.get('new_attempts')[0]
-                except IndexError as error:
-                    print('IndexError')
+                else:
                     continue
 
                 lesson_title = new_attempts.get('lesson_title')
@@ -39,9 +38,8 @@ def main():
 
                 checking_result = 'Есть ошибки' if is_negative else 'Работа прошла проверку'
 
-                message = f"У вас проверили работу '{lesson_title}'\n" \
-                          f"{checking_result}\n" \
-                          f"Ссылка на урок: {lesson_url}"
+                message = f'''Работа "{lesson_title}" проверена \n{checking_result} \nСсылка на урок: {lesson_url}'''
+
                 bot.send_message(chat_id=TG_CHAT_ID, text=message)
 
         except requests.exceptions.ConnectTimeout as error:
