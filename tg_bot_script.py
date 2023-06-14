@@ -5,20 +5,21 @@ import requests
 import telegram
 from dotenv import load_dotenv
 
-load_dotenv()
-
-DEVMAN_AUTH_TOKEN = os.getenv('DEVMAN_AUTH_TOKEN')
-TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
-TG_CHAT_ID = os.getenv('TG_CHAT_ID')
-
-url = 'https://dvmn.org/api/long_polling'
-headers = {'Authorization': DEVMAN_AUTH_TOKEN}
-
-bot = telegram.Bot(token=TG_BOT_TOKEN)
-
 
 def main():
+    load_dotenv()
+
+    DEVMAN_AUTH_TOKEN = os.getenv('DEVMAN_AUTH_TOKEN')
+    TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
+    TG_CHAT_ID = os.getenv('TG_CHAT_ID')
+
+    url = 'https://dvmn.org/api/long_polling'
+    headers = {'Authorization': DEVMAN_AUTH_TOKEN}
+
+    bot = telegram.Bot(token=TG_BOT_TOKEN)
+
     payload = None
+
     while True:
         try:
             response = requests.get(url, headers=headers, data=payload, timeout=120)
