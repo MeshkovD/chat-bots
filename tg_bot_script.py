@@ -13,21 +13,22 @@ TG_CHAT_ID = os.getenv('TG_CHAT_ID')
 
 url = 'https://dvmn.org/api/long_polling'
 headers = {'Authorization': DEVMAN_AUTH_TOKEN}
-payload = None
 
 bot = telegram.Bot(token=TG_BOT_TOKEN)
 
 
 def main():
+    payload = None
     while True:
         try:
             response = requests.get(url, headers=headers, data=payload, timeout=120)
             response.raise_for_status()
-            payload = {'timestamp': response.json().get('timestamp_to_request')}
+            response_json = response.json()
+            payload = {'timestamp': response_json.get('timestamp_to_request')}
 
-            if response.json().get('status') == "found":
+            if response_json.get('status') == "found":
                 try:
-                    new_attempts = response.json().get('new_attempts')[0]
+                    new_attempts = response_json.get('new_attempts')[0]
                 except IndexError as error:
                     print('IndexError')
                     continue
