@@ -7,6 +7,12 @@ import telegram
 from dotenv import load_dotenv
 
 
+load_dotenv()
+DEVMAN_AUTH_TOKEN = os.getenv('DEVMAN_AUTH_TOKEN')
+TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
+TG_CHAT_ID = os.getenv('TG_CHAT_ID')
+
+
 class TelegramLogsHandler(logging.Handler):
 
     def __init__(self, tg_bot, chat_id):
@@ -20,16 +26,10 @@ class TelegramLogsHandler(logging.Handler):
 
 
 def main():
-    load_dotenv()
-    DEVMAN_AUTH_TOKEN = os.getenv('DEVMAN_AUTH_TOKEN')
-    TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
-    TG_CHAT_ID = os.getenv('TG_CHAT_ID')
-
     url = 'https://dvmn.org/api/long_polling'
     headers = {'Authorization': DEVMAN_AUTH_TOKEN}
 
     tg_bot = telegram.Bot(token=TG_BOT_TOKEN)
-
 
     logger = logging.getLogger('Logger')
     logger.setLevel(logging.INFO)
