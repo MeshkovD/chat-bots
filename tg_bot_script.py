@@ -46,11 +46,11 @@ def main():
             payload = {'timestamp': review_info.get('timestamp_to_request')}
 
             if review_info.get('status') == "found":
-                new_attempts = review_info.get('new_attempts')[0]
+                new_attempt = review_info.get('new_attempts')[0]
 
-                lesson_title = new_attempts.get('lesson_title')
-                lesson_url = new_attempts.get('lesson_url')
-                is_negative = new_attempts.get('is_negative')
+                lesson_title = new_attempt.get('lesson_title')
+                lesson_url = new_attempt.get('lesson_url')
+                is_negative = new_attempt.get('is_negative')
 
                 checking_result = 'Есть ошибки' if is_negative else 'Работа прошла проверку'
 
