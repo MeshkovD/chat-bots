@@ -75,3 +75,23 @@ TG_CHAT_ID=463123117
 DEVMAN_AUTH_TOKEN - токен для работы с сервером devman, необходимо получить [здесь](https://dvmn.org/api/docs/).  
 TG_BOT_TOKEN - токен, который вы получили от  [BotFather](https://t.me/BotFather).  
 TG_CHAT_ID - Чтобы получить свой chat_id, напишите в Telegram специальному боту: [@userinfobot](https://telegram.me/userinfobot).
+
+
+## Как запустить python-скрипт в контейнере Docker
+
+В папке проекто лежит файл Dockerfile, он содержит в себе все настроки для запуска скрипта в контейнере.
+
+1. Убедитесь, что у вас установлен Docker.  
+Загрузить его можно по [ссылке](https://docs.docker.com/get-docker/)  
+Если вам нужна информация об установке Docker Engine, см. [обзор установки Docker Engine](https://docs.docker.com/engine/install/).
+2. Перейдите папку содержащую Dockerfile
+3. Соберите образ командой:
+```sh
+build -t chat-bots .
+```
+(точка в конце важна)
+4. Запустите контейнер командой:
+```sh
+docker run --env-file .env chat-bots
+```
+.env - путь к файлу содержащему переменные окружения
