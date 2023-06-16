@@ -42,11 +42,11 @@ def main():
         try:
             response = requests.get(url, headers=headers, data=payload, timeout=120)
             response.raise_for_status()
-            response_data = response.json()
-            payload = {'timestamp': response_data.get('timestamp_to_request')}
+            review_info = response.json()
+            payload = {'timestamp': review_info.get('timestamp_to_request')}
 
-            if response_data.get('status') == "found":
-                new_attempts = response_data.get('new_attempts')[0]
+            if review_info.get('status') == "found":
+                new_attempts = review_info.get('new_attempts')[0]
 
                 lesson_title = new_attempts.get('lesson_title')
                 lesson_url = new_attempts.get('lesson_url')
