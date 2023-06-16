@@ -59,13 +59,13 @@ def main():
                 tg_bot.send_message(chat_id=TG_CHAT_ID, text=message)
 
         except requests.exceptions.ConnectTimeout as error:
-            logger.critical(f'Ошибка: \n{error}')
+            logger.critical(f'Ошибка: \n{error}', exc_info=True)
 
         except requests.exceptions.ReadTimeout as error:
-            logger.critical(f'Ошибка: \n{error}')
+            logger.error(f'Ошибка: \n{error}', exc_info=True)
 
         except requests.exceptions.ConnectionError as error:
-            logger.critical(f'Ошибка: \n{error}')
+            logger.error(f'Ошибка: \n{error}', exc_info=True)
             sleep(30)
 
 
