@@ -33,7 +33,6 @@ def main():
 
     tg_bot = telegram.Bot(token=TG_BOT_TOKEN)
 
-    logger = logging.getLogger('Logger')
     logger.setLevel(logging.INFO)
     logger.addHandler(TelegramLogsHandler(tg_bot, TG_CHAT_ID))
     logger.info('Бот запущен')
